@@ -3,30 +3,28 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const users = require('./routes/api/users');
-const profiles = require('./routes/api/profiles');
+const profile = require('./routes/api/profile');
 const posts = require('./routes/api/posts');
 
 const app = express();
 
 // Body parser middleware
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-// Mongo Config
+// DB Config
 const db = require('./config/keys').mongoURI;
 
-// connect to Mlab MongoDB
+// Connect to MongoDB
 mongoose
   .connect(db)
   .then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err))
+  .catch(err => console.log(err));
 
-app.get('/', (req, res) => res.send('Hello'));
-
-//  use Routes
-app.use('/api/users', users)
-app.use('/api/profiles', profiles)
-app.use('/api/posts', posts)
+// Use Routes
+app.use('/api/users', users);
+app.use('/api/profile', profile);
+app.use('/api/posts', posts);
 
 const port = process.env.PORT || 5000;
 
