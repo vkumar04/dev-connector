@@ -18,6 +18,11 @@ mongoose
 
 app.get('/', (req, res) => res.send('Hello'));
 
+//  use Routes
+app.use('/api/users', users)
+app.use('/api/profiles', profiles)
+app.use('/api/posts', posts)
+
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
