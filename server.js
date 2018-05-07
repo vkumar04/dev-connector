@@ -6,6 +6,12 @@ const app = express();
 // Mongo Config
 const db = require('./config/keys').mongoURI;
 
+// connect to Mlab MongoDB
+mongoose
+  .connect(db)
+  .then(() => console.log('MongoDB Connected'))
+  .catch(err => console.log(err))
+
 app.get('/', (req, res) => res.send('Hello'));
 
 const port = process.env.PORT || 5000;
